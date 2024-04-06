@@ -207,7 +207,7 @@ func (app *application) createPostComment(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	err = app.writeJSON(w, http.StatusCreated, commentId)
+	err = app.writeJSON(w, http.StatusCreated, wrapper{"id": commentId, "comment": comment})
 	if err != nil {
 		app.writeServerError(w, r, err)
 	}

@@ -60,22 +60,9 @@ func main() {
 
 // Opens the database
 func openDB(dsn string) (*sql.DB, error) {
-	attempts := 3
-	connected := false
-	var db *sql.DB
-	var err error
-
-	for i := 0; i < attempts; i++ {
-		db, err = sql.Open("postgres", dsn)
-		if err == nil {
-			connected = true
-			break
-		}
-
-		seconds := time.Duration(3 + i)
-		time.Sleep(seconds * time.Second)
-	}
-	if !connected {
+	time.Sleep(2 * time.Second)
+	db, err := sql.Open("postgres", dsn)
+	if err != nil {
 		return nil, err
 	}
 
